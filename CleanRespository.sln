@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{90912334-CADB-4125-80ED-2D91538F9A91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{98DB3C1B-CE26-44D7-8A90-500E297E130F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{089E283F-83BF-42F8-8D78-343110A2BA2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{90912334-CADB-4125-80ED-2D91538F9A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90912334-CADB-4125-80ED-2D91538F9A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90912334-CADB-4125-80ED-2D91538F9A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98DB3C1B-CE26-44D7-8A90-500E297E130F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98DB3C1B-CE26-44D7-8A90-500E297E130F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98DB3C1B-CE26-44D7-8A90-500E297E130F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98DB3C1B-CE26-44D7-8A90-500E297E130F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089E283F-83BF-42F8-8D78-343110A2BA2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089E283F-83BF-42F8-8D78-343110A2BA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089E283F-83BF-42F8-8D78-343110A2BA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089E283F-83BF-42F8-8D78-343110A2BA2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

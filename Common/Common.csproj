@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90912334-CADB-4125-80ED-2D91538F9A91}</ProjectGuid>
+    <ProjectGuid>{98DB3C1B-CE26-44D7-8A90-500E297E130F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Application</RootNamespace>
-    <AssemblyName>Application</AssemblyName>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,36 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customers\Queries\GetCustomerList\CustomerModel.cs" />
-    <Compile Include="Customers\Queries\GetCustomerList\GetCustomersListQuery.cs" />
-    <Compile Include="Customers\Queries\GetCustomerList\IGetCustomersListQuery.cs" />
-    <Compile Include="Interfaces\Persistence\ICustomerRepository.cs" />
-    <Compile Include="Interfaces\Persistence\IEmployeeRepository.cs" />
-    <Compile Include="Interfaces\Persistence\IProductRepository.cs" />
-    <Compile Include="Interfaces\Persistence\IRepository.cs" />
-    <Compile Include="Interfaces\Persistence\ISaleRespository.cs" />
-    <Compile Include="Interfaces\Persistence\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{98db3c1b-ce26-44d7-8a90-500e297e130f}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{C9BE9F2D-6006-4395-B2B9-92F573F275E1}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Customers\Commands\" />
-    <Folder Include="Employees\Commands\" />
-    <Folder Include="Employees\Queries\" />
-    <Folder Include="Interfaces\Infrastructure\" />
-    <Folder Include="Products\Commands\" />
-    <Folder Include="Products\Queries\" />
-    <Folder Include="Sales\Commands\" />
-    <Folder Include="Sales\Queries\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -25,5 +25,4 @@ namespace Application.Customers.Queries.GetCustomerList
             return customers.ToList();
         }
     }
-    }
 }
