@@ -54,10 +54,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\Dapper\ConnectionFactory.cs" />
     <Compile Include="Shared\Dapper\DapperRepository.cs" />
+    <Compile Include="Shared\Dapper\DapperUnitOfWork.cs" />
     <Compile Include="Shared\Dapper\IConnectionFactory.cs" />
     <Compile Include="Shared\EntityFramework\DatabaseContext.cs" />
     <Compile Include="Shared\EntityFramework\IDatabaseContext.cs" />
     <Compile Include="Shared\EntityFramework\Repository.cs" />
+    <Compile Include="Shared\EntityFramework\EfUnitOfWork.cs" />
     <Compile Include="Shared\Memory\MemoryRepository.cs" />
     <Compile Include="Shared\Memory\MemoryUnitOfWork.cs" />
   </ItemGroup>

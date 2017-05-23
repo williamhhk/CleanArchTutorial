@@ -38,5 +38,10 @@ namespace Persistence.Shared.EntityFramework
             //modelBuilder.Configurations.Add(new ProductConfiguration());
             //modelBuilder.Configurations.Add(new SaleConfiguration());
         }
+
+        public void Save()
+        {
+            this.SaveChanges();
+        }
     }
 }

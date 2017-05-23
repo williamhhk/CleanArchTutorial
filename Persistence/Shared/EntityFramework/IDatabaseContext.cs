@@ -19,5 +19,6 @@ namespace Persistence.Shared.EntityFramework
 
         IDbSet<T> Set<T>() where T : class, IEntity;
 
+        void Save();
     }
 }
