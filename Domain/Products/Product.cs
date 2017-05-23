@@ -1,4 +1,4 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Common;
 namespace Domain.Products
 {
     public class Product : IEntity

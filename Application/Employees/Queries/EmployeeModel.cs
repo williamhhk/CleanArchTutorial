@@ -1,8 +1,6 @@
-﻿using Domain.Common;
-
-namespace Domain.Customers
+﻿namespace Application.Employees.Queries
 {
-    public class Customer : IEntity
+    public class EmployeeModel
     {
         public int Id { get; set; }
 

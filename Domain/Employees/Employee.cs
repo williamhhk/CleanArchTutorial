@@ -1,6 +1,4 @@
-﻿
-using Domain.Interfaces;
-
+﻿using Domain.Common;
 namespace Domain.Employees
 {
     public class Employee : IEntity

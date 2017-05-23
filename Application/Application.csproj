@@ -43,6 +43,9 @@
     <Compile Include="Customers\Queries\GetCustomerList\CustomerModel.cs" />
     <Compile Include="Customers\Queries\GetCustomerList\GetCustomersListQuery.cs" />
     <Compile Include="Customers\Queries\GetCustomerList\IGetCustomersListQuery.cs" />
+    <Compile Include="Employees\Queries\EmployeeModel.cs" />
+    <Compile Include="Employees\Queries\GetEmployeesListQuery.cs" />
+    <Compile Include="Employees\Queries\IGetEmployeesListQuery.cs" />
     <Compile Include="Interfaces\Persistence\ICustomerRepository.cs" />
     <Compile Include="Interfaces\Persistence\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\Persistence\IProductRepository.cs" />
@@ -64,7 +67,6 @@
   <ItemGroup>
     <Folder Include="Customers\Commands\" />
     <Folder Include="Employees\Commands\" />
-    <Folder Include="Employees\Queries\" />
     <Folder Include="Interfaces\Infrastructure\" />
     <Folder Include="Products\Commands\" />
     <Folder Include="Products\Queries\" />

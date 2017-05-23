@@ -1,6 +1,7 @@
-﻿using Domain.Customers;
+﻿using Domain.Common;
+using Domain.Customers;
 using Domain.Employees;
-using Domain.Interfaces;
+
 using Domain.Products;
 using System;
 

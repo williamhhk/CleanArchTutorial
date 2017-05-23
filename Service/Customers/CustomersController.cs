@@ -7,16 +7,17 @@ namespace Service.Customers
     public class CustomersController : ApiController
     {
 
-        //private readonly IGetCustomersListQuery _query;
+        private readonly IGetCustomersListQuery _query;
 
-        //public CustomersController(IGetCustomersListQuery query)
-        //{
-        //    _query = query;
-        //}
+        public CustomersController(IGetCustomersListQuery query)
+        {
+            _query = query;
+        }
 
         public IHttpActionResult Get()
         {
-            return Ok("OK");
+            return Ok();
+            //return Ok(_query.Execute());
         }
     }
 }
