@@ -19,5 +19,14 @@ namespace Service.Customers
             return Ok();
             //return Ok(_query.Execute());
         }
+
+        public IHttpActionResult Create()
+        {
+            // Create Customer
+            // Send command...
+
+            return Ok();
+            //return Ok(_query.Execute());
+        }
     }
 }

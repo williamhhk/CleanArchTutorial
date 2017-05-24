@@ -54,10 +54,12 @@ namespace Service
             builder.RegisterType<DatabaseContext>().As<IDatabaseContext>().SingleInstance();
 
             // MediatR
-            //builder.RegisterType<Mediator>().As<IMediator>().SingleInstance();
-            //// Where the event handler is located.  
-            //builder.RegisterAssemblyTypes(Assembly.Load("Domain"))
-            //    .Where(t=>t.GetInterfaces().Any(i=>!t.IsAbstract && i.IsGenericType && i.GetGenericTypeDefinition.Equals(typeof)))
+            builder.RegisterType<Mediator>().As<IMediator>().SingleInstance();
+            // Where the event handler is located.  
+            builder.RegisterAssemblyTypes(Assembly.Load("Domain"))
+                .Where(t => t.GetInterfaces().Any(i => !t.IsAbstract && i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IRequestHandler<CustomerCreated>))));
+
+
 
 
             var container = builder.Build();
