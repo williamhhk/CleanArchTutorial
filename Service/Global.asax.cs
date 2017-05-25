@@ -2,6 +2,7 @@
 using Application.Employees.Queries;
 using Application.Interfaces.Persistence;
 using Autofac;
+using Autofac.Features.Variance;
 using Autofac.Integration.WebApi;
 using Domain.Customers;
 using Domain.Employees;
@@ -11,6 +12,8 @@ using Persistence.Employees;
 using Persistence.Memory.Shared;
 using Persistence.Shared.Dapper;
 using Persistence.Shared.EntityFramework;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +37,8 @@ namespace Service
             builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).InstancePerRequest();
 
             //  Using Stubdata
-            //builder.RegisterType<StubDataCustomerRepository>().As<ICustomerRepository>().SingleInstance();
-            //builder.RegisterType<MemoryRepository<Customer>>().As<MemoryRepository<Customer>>().SingleInstance();
+            builder.RegisterType<StubDataCustomerRepository>().As<ICustomerRepository>().SingleInstance();
+            builder.RegisterType<MemoryRepository<Customer>>().As<MemoryRepository<Customer>>().SingleInstance();
 
 
             // Using Dapper
@@ -45,25 +48,65 @@ namespace Service
 
 
             // Using EF
-            builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().SingleInstance();
-            builder.RegisterType<Repository<Customer>>().As<IRepository<Customer>>().SingleInstance();
+            //builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().SingleInstance();
+            //builder.RegisterType<Repository<Customer>>().As<IRepository<Customer>>().SingleInstance();
+            ////builder.RegisterType<DatabaseContext>().As<IDatabaseContext>().SingleInstance();
+
+            //builder.RegisterType<EmployeeRespository>().As<IEmployeeRepository>().SingleInstance();
+            //builder.RegisterType<Repository<Employee>>().As<IRepository<Employee>>().SingleInstance();
             //builder.RegisterType<DatabaseContext>().As<IDatabaseContext>().SingleInstance();
 
-            builder.RegisterType<EmployeeRespository>().As<IEmployeeRepository>().SingleInstance();
-            builder.RegisterType<Repository<Employee>>().As<IRepository<Employee>>().SingleInstance();
-            builder.RegisterType<DatabaseContext>().As<IDatabaseContext>().SingleInstance();
+            //// MediatR
+            //builder.RegisterType<Mediator>().As<IMediator>().SingleInstance();
+            //// Where the event handler is located.  
+            //builder.RegisterAssemblyTypes(Assembly.Load("Domain"))
+            //    .Where(t => t.GetInterfaces().Any(i => !t.IsAbstract && i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IRequestHandler<CustomerCreated>))));
+
 
             // MediatR
-            builder.RegisterType<Mediator>().As<IMediator>().SingleInstance();
-            // Where the event handler is located.  
-            builder.RegisterAssemblyTypes(Assembly.Load("Domain"))
-                .Where(t => t.GetInterfaces().Any(i => !t.IsAbstract && i.IsGenericType && i.GetGenericTypeDefinition().Equals(typeof(IRequestHandler<CustomerCreated>))));
+            builder
+  .RegisterSource(new ContravariantRegistrationSource());
 
+            // mediator itself
+            builder
+              .RegisterType<Mediator>()
+              .As<IMediator>()
+              .InstancePerLifetimeScope();
 
+            // request handlers
+            builder
+              .Register<SingleInstanceFactory>(ctx => {
+                  var c = ctx.Resolve<IComponentContext>();
+                  return t => { object o; return c.TryResolve(t, out o) ? o : null; };
+              })
+              .InstancePerLifetimeScope();
 
+            // notification handlers
+            builder
+              .Register<MultiInstanceFactory>(ctx => {
+                  var c = ctx.Resolve<IComponentContext>();
+                  return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
+              })
+              .InstancePerLifetimeScope();
 
+            // finally register our custom code (individually, or via assembly scanning)
+            // - requests & handlers as transient, i.e. InstancePerDependency()
+            // - pre/post-processors as scoped/per-request, i.e. InstancePerLifetimeScope()
+            // - behaviors as transient, i.e. InstancePerDependency()
+            builder.RegisterAssemblyTypes(Assembly.Load("Domain")).AsImplementedInterfaces(); // via assembly scan
+                                                                                                            //
             var container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            var connectionString = @"Data Source=WILLIAM-AZ;Initial Catalog=EventsLog;Integrated Security=True";  // or the name of a connection string in your .config file
+            var tableName = "Logs";
+            var columnOptions = new ColumnOptions();  // optional
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.MSSqlServer(connectionString, tableName, columnOptions: columnOptions)
+//                .WriteTo.Console()
+                .CreateLogger();
+
         }
     }
 }

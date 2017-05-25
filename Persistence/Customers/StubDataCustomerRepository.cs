@@ -13,9 +13,9 @@ namespace Persistence.Customers
         public StubDataCustomerRepository(MemoryRepository<Customer> memRepository)
         {
             this._memRepository = memRepository;
-            _memRepository.Add(new Customer { Id = 1, Name = "William Han" });
-            _memRepository.Add(new Customer { Id = 2, Name = "Uncle Bob" });
-            _memRepository.Add(new Customer { Id = 1, Name = "Martin Fowler" });
+            _memRepository.Add(Customer.Create(1, "William Han"));
+            _memRepository.Add(Customer.Create(2, "Martin Fowler"));
+            _memRepository.Add(Customer.Create(3, "Uncle Bob"));
         }
 
 
