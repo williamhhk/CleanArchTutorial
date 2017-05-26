@@ -20,8 +20,7 @@ namespace Service.Employees
 
         public IHttpActionResult Get()
         {
-            return Ok();
-            //return Ok(_query.Execute());
+            return Ok(_query.Execute());
         }
     }
 }

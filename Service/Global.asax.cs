@@ -33,8 +33,8 @@ namespace Service
             //Autofac Configuration
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).InstancePerRequest();
-            builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).InstancePerRequest();
+            builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).SingleInstance();
+            builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).SingleInstance();
 
             //  Using Stubdata
             builder.RegisterType<StubDataCustomerRepository>().As<ICustomerRepository>().SingleInstance();
@@ -65,7 +65,7 @@ namespace Service
 
             // MediatR
             builder
-  .RegisterSource(new ContravariantRegistrationSource());
+            .RegisterSource(new ContravariantRegistrationSource());
 
             // mediator itself
             builder

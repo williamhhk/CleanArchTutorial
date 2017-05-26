@@ -12,13 +12,12 @@ namespace CleanRepository.Tests.Domain
 
         public CustomerTests()
         {
-            _customer = new Customer();
+            _customer = Customer.Create(Id, Name);
         }
 
         [Test]
         public void CustomerTests_TestSetAndGetId_No_Error()
         {
-            _customer.Id = Id;
 
             Assert.That(_customer.Id,
                 Is.EqualTo(Id));
@@ -27,7 +26,6 @@ namespace CleanRepository.Tests.Domain
         [Test]
         public void CustomerTests_TestSetAndGetName_No_Error()
         {
-            _customer.Name = Name;
 
             Assert.That(_customer.Name,
                 Is.EqualTo(Name));
@@ -36,7 +34,6 @@ namespace CleanRepository.Tests.Domain
         [Test]
         public void CustomerTests_TestSetAndGetId_Not_Equal_No_Error()
         {
-            _customer.Id = 1000000000;
             Assert.That(_customer.Id, Is.Not.EqualTo(Id));
         }
     }

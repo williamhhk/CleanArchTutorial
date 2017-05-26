@@ -24,11 +24,7 @@ namespace CleanRepository.Tests.Application
         {
             _mocker = new AutoMoqer();
 
-            _customer = new Customer()
-            {
-                Id = Id,
-                Name = Name
-            };
+            _customer = Customer.Create(Id, Name);
             
             _customers = new List<Customer>()
             {
