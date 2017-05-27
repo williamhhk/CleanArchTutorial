@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Service.CustomHandler;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 
 namespace Service
 {
@@ -10,6 +12,11 @@ namespace Service
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            // Custom Message Handler, e.g. authenticate or checking before proceeding to next step in the pipeline.
+            //config.MessageHandlers.Add(new MessageHandler());
+
+            //  Replace default with custom Exception Handler.
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

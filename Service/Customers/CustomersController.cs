@@ -1,12 +1,13 @@
 ﻿using Application.Customers.Queries.GetCustomerList;
 using Domain.Customers;
 using MediatR;
+using Service.Common;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Service.Customers
 {
-    public class CustomersController : ApiController
+    public class CustomersController : ApiControllerBase
     {
 
         private readonly IGetCustomersListQuery _query;
@@ -33,6 +34,14 @@ namespace Service.Customers
                 Customer = Customer.Create(10, "Demoing")
             });
             return Ok();
+        }
+
+        public IHttpActionResult Delete()
+        {
+            return CreateHttpResponse(() =>
+           {
+               throw new System.Exception();
+           });
         }
     }
 }

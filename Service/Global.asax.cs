@@ -4,6 +4,7 @@ using Application.Interfaces.Persistence;
 using Autofac;
 using Autofac.Features.Variance;
 using Autofac.Integration.WebApi;
+using AutofacSerilogIntegration;
 using Domain.Customers;
 using Domain.Employees;
 using MediatR;
@@ -16,11 +17,9 @@ using Serilog;
 using Serilog.Sinks.MSSqlServer;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
+
 
 namespace Service
 {
@@ -30,8 +29,27 @@ namespace Service
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            //Serilog Initialization
+            var connectionString = @"Data Source=WILLIAM-AZ;Initial Catalog=EventsLog;Integrated Security=True";  // or the name of a connection string in your .config file
+            var tableName = "Logs";
+            var columnOptions = new ColumnOptions();  // optional
+
+            columnOptions.Store.Add(StandardColumn.LogEvent);
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.MSSqlServer(connectionString, tableName, columnOptions: columnOptions)
+                //                .WriteTo.Console()
+                .CreateLogger();
+
+
             //Autofac Configuration
             var builder = new ContainerBuilder();
+
+            //  Register serilog using  Install-Package AutofacSerilogIntegration
+
+            builder.RegisterLogger();
+
+            builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
+
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).SingleInstance();
             builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).SingleInstance();
@@ -96,16 +114,12 @@ namespace Service
             builder.RegisterAssemblyTypes(Assembly.Load("Domain")).AsImplementedInterfaces(); // via assembly scan
                                                                                                             //
             var container = builder.Build();
+
+            //  Set resolver for anti-IOC later user
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            
 
-            var connectionString = @"Data Source=WILLIAM-AZ;Initial Catalog=EventsLog;Integrated Security=True";  // or the name of a connection string in your .config file
-            var tableName = "Logs";
-            var columnOptions = new ColumnOptions();  // optional
 
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.MSSqlServer(connectionString, tableName, columnOptions: columnOptions)
-//                .WriteTo.Console()
-                .CreateLogger();
 
         }
     }
