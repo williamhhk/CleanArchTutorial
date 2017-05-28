@@ -31,10 +31,5 @@ namespace CleanRepository.Tests.Domain
                 Is.EqualTo(Name));
         }
 
-        [Test]
-        public void CustomerTests_TestSetAndGetId_Not_Equal_No_Error()
-        {
-            Assert.That(_customer.Id, Is.Not.EqualTo(Id));
-        }
     }
 }
