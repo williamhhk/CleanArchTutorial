@@ -54,6 +54,9 @@ namespace Service
             builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).SingleInstance();
             builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).SingleInstance();
 
+
+            // Use one of the following repository
+
             //  Using Stubdata
             builder.RegisterType<StubDataCustomerRepository>().As<ICustomerRepository>().SingleInstance();
             builder.RegisterType<MemoryRepository<Customer>>().As<MemoryRepository<Customer>>().SingleInstance();

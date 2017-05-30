@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMoq, Version=1.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMoq.2.0.0\lib\net45\AutoMoq.dll</HintPath>
     </Reference>
@@ -77,12 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customers\GetCustomerList\GetCustomerListSteps.cs" />
     <Compile Include="Customers\GetCustomerList\GetCustomerList.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GetCustomerList.feature</DependentUpon>
     </Compile>
+    <Compile Include="Customers\GetCustomerList\GetCustomersListSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\AppContext.cs" />
     <Compile Include="Shared\DatabaseInitializer.cs" />

@@ -1,6 +1,14 @@
-﻿using AutoMoq;
+﻿using Application.Customers.Queries.GetCustomerList;
+using Application.Interfaces.Persistence;
+using Autofac;
+using Autofac.Core;
+using AutoMoq;
+using Domain.Customers;
+using Persistence.Customers;
+using Persistence.Memory.Shared;
 using Persistence.Shared.EntityFramework;
 using System;
+using System.Reflection;
 
 namespace Specification.Shared
 {
@@ -9,17 +17,13 @@ namespace Specification.Shared
     {
         public AutoMoqer Mocker;
         public IDatabaseContext DatabaseContext;
+        public IContainer Container;
 
         public AppContext()
         {
             SetUpAutoMocker();
-
             SetUpMockDatabase();
-
-
-
-
-            //SetUpIocContainer();
+            SetUpIocContainer();
         }
 
         private void SetUpAutoMocker()
@@ -39,10 +43,19 @@ namespace Specification.Shared
         }
 
 
+        private void SetUpIocContainer()
+        {
+            ////Autofac Configuration
+            var builder = new ContainerBuilder();
+            builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).SingleInstance();
+            builder.RegisterType<Repository<Customer>>().As<IRepository<Customer>>();
+            builder.RegisterType<DatabaseContext>().As<IDatabaseContext>();
 
-        //private void SetUpIocContainer()
-        //{
-        //    Container = IoC.Initialize(this);
-        //}
+            builder.RegisterType<StubDataCustomerRepository>().As<ICustomerRepository>().SingleInstance();
+            builder.RegisterType<MemoryRepository<Customer>>().As<MemoryRepository<Customer>>().SingleInstance();
+
+            builder.RegisterAssemblyTypes(Assembly.Load("Specification")).AsSelf(); // via assembly scan
+            Container = builder.Build();
+        }
     }
 }
