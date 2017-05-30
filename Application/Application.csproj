@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediatR, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.3.0.1\lib\net45\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Customers\Queries\GetCustomerList\CustomerModel.cs" />
     <Compile Include="Customers\Queries\GetCustomerList\GetCustomersListQuery.cs" />
+    <Compile Include="Customers\Queries\GetCustomerList\GetCustomersListQuery1.cs" />
+    <Compile Include="Customers\Queries\GetCustomerList\GetCustomersListQuery1Handler.cs" />
     <Compile Include="Customers\Queries\GetCustomerList\IGetCustomersListQuery.cs" />
     <Compile Include="Employees\Queries\EmployeeModel.cs" />
     <Compile Include="Employees\Queries\GetEmployeesListQuery.cs" />
@@ -72,6 +77,9 @@
     <Folder Include="Products\Queries\" />
     <Folder Include="Sales\Commands\" />
     <Folder Include="Sales\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

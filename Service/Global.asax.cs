@@ -115,7 +115,8 @@ namespace Service
             // - pre/post-processors as scoped/per-request, i.e. InstancePerLifetimeScope()
             // - behaviors as transient, i.e. InstancePerDependency()
             builder.RegisterAssemblyTypes(Assembly.Load("Domain")).AsImplementedInterfaces(); // via assembly scan
-                                                                                                            //
+            builder.RegisterAssemblyTypes(Assembly.Load("Application")).AsImplementedInterfaces(); // via assembly scan
+                                                                                              //
             var container = builder.Build();
 
             //  Set resolver for anti-IOC later user
