@@ -5,9 +5,11 @@ using Service.Common;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Service.Customers
 {
+    [RoutePrefix("api/v1")]
     public class CustomersController : ApiControllerBase
     {
 
@@ -22,17 +24,31 @@ namespace Service.Customers
             //_query = query;
         }
 
+        [HttpGet]
+        [Route("get")]
         public IHttpActionResult Get()
         {
             // use mediator to send in a query ....
             // create a new class e.g. QueryCustomersList
             // return the results.
             var list = _mediator.Send(new GetCustomersListQuery1());
-            return Ok(_mediator.Send(new GetCustomersListQuery1()));
+            return Ok(list.Result);
 
             //return Ok();
             //return Ok(_query.Execute());
         }
+
+        [HttpGet]
+        [Route("async")]
+        public async Task<IHttpActionResult> GetAsync()
+        {
+            return await CreateHttpResponseAsync(() =>
+             {
+                 return Ok(_mediator.Send(new GetCustomersListQuery1()).Result);
+             });
+
+        }
+
 
         public IHttpActionResult Create()
         {

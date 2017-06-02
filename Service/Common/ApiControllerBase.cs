@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Service.Common
@@ -22,5 +23,21 @@ namespace Service.Common
             }
             return response;
         }
+
+        protected async Task<IHttpActionResult> CreateHttpResponseAsync(Func<IHttpActionResult> function)
+        {
+            var _logger = GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(ILogger)) as ILogger;
+            _logger.Information("Inside ApiControllerBase");
+            try
+            {
+                return await Task.FromResult(function.Invoke());
+            }
+            catch (Exception ex)
+            {
+                _logger.Information("Something went wrong here");
+                return await Task.FromResult(BadRequest(ex.Message));
+            }
+        }
+
     }
 }
