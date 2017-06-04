@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.EventLog;
 
 namespace Service.Customers
 {
@@ -68,5 +69,17 @@ namespace Service.Customers
                throw new System.Exception();
            });
         }
+
+        [HttpGet]
+        [Route("dapperquery")]
+        public async Task<IHttpActionResult> DapperQuery()
+        {
+            return await CreateHttpResponseAsync(() =>
+            {
+                return Ok(_mediator.Send(new EventLogQuery.Query()).Result);
+            });
+
+        }
+
     }
 }

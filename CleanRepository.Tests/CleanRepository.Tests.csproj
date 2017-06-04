@@ -87,8 +87,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\EventLogListQueryTests.cs" />
     <Compile Include="Application\GetCustomersListQueryTests.cs" />
     <Compile Include="Application\GetEmployeesListQueryTests.cs" />
+    <Compile Include="Common\CredentialManagerTests.cs" />
     <Compile Include="Domain\CustomerTests.cs" />
     <Compile Include="Domain\EmployeeTests.cs" />
     <Compile Include="Domain\ProductTests.cs" />

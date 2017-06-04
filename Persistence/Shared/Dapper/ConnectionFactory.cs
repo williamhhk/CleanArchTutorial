@@ -6,10 +6,11 @@ namespace Persistence.Shared.Dapper
 {
     public class ConnectionFactory : IConnectionFactory
     {
-        private readonly string connectionString = "Server=;Database=;User ID=;Password=!";
+        private readonly string _connectionString;
 
-        public ConnectionFactory()
+        public ConnectionFactory(string connectionStr)
         {
+            _connectionString = connectionStr;
         }
 
         public IDbConnection GetConnection
@@ -18,7 +19,7 @@ namespace Persistence.Shared.Dapper
             {
                 var factory = DbProviderFactories.GetFactory("System.Data.SqlClient");
                 var conn = factory.CreateConnection();
-                conn.ConnectionString = connectionString;
+                conn.ConnectionString = _connectionString;
                 conn.Open();
                 return conn;
             }

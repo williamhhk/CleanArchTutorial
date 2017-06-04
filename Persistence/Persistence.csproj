@@ -55,6 +55,7 @@
     <Compile Include="Shared\Dapper\ConnectionFactory.cs" />
     <Compile Include="Shared\Dapper\DapperRepository.cs" />
     <Compile Include="Shared\Dapper\DapperUnitOfWork.cs" />
+    <Compile Include="Shared\Dapper\DemoDbConnectionFactory.cs" />
     <Compile Include="Shared\Dapper\IConnectionFactory.cs" />
     <Compile Include="Shared\EntityFramework\DatabaseContext.cs" />
     <Compile Include="Shared\EntityFramework\IDatabaseContext.cs" />

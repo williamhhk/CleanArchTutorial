@@ -5,6 +5,7 @@ using Autofac;
 using Autofac.Features.Variance;
 using Autofac.Integration.WebApi;
 using AutofacSerilogIntegration;
+using Common;
 using Domain.Customers;
 using Domain.Employees;
 using MediatR;
@@ -53,7 +54,7 @@ namespace Service
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType(typeof(GetCustomersListQuery)).As(typeof(IGetCustomersListQuery)).SingleInstance();
             builder.RegisterType(typeof(GetEmployeesListQuery)).As(typeof(IGetEmployeesListQuery)).SingleInstance();
-
+            builder.RegisterType<CredentialsManager>().As<ICredentialsManager>().InstancePerLifetimeScope();
 
             // Use one of the following repository
 
@@ -116,7 +117,16 @@ namespace Service
             // - behaviors as transient, i.e. InstancePerDependency()
             builder.RegisterAssemblyTypes(Assembly.Load("Domain")).AsImplementedInterfaces(); // via assembly scan
             builder.RegisterAssemblyTypes(Assembly.Load("Application")).AsImplementedInterfaces(); // via assembly scan
+            builder.RegisterAssemblyTypes(Assembly.Load("Common")).AsImplementedInterfaces(); // via assembly scan
                                                                                               //
+
+
+            //  Dapper Inline SQL
+            builder.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance();
+            // NOTE : 'connectionStr' match parameter name in DemoDbConnectionFactory
+            builder.RegisterType<DemoDbConnectionFactory>().As<IDemoDbConnectionFactory>().WithParameter("connectionStr", "Data Source=WILLIAM-AZ;Initial Catalog=EventsLog;Integrated Security=True").SingleInstance();
+
+
             var container = builder.Build();
 
             //  Set resolver for anti-IOC later user

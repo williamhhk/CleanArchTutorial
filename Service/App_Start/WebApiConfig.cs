@@ -1,4 +1,5 @@
-﻿using Service.CustomHandler;
+﻿using Common;
+using Service.CustomHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace Service
     {
         public static void Register(HttpConfiguration config)
         {
+            var config1 = new CredentialsManager();
+            var domain = config1.Domain;
+
+
             // Web API configuration and services
             // Custom Message Handler, e.g. authenticate or checking before proceeding to next step in the pipeline.
             //config.MessageHandlers.Add(new MessageHandler());

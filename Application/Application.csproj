@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MediatR.3.0.1\lib\net45\MediatR.dll</HintPath>
     </Reference>
@@ -51,7 +54,10 @@
     <Compile Include="Employees\Queries\EmployeeModel.cs" />
     <Compile Include="Employees\Queries\GetEmployeesListQuery.cs" />
     <Compile Include="Employees\Queries\IGetEmployeesListQuery.cs" />
+    <Compile Include="EventLog\EventLog.cs" />
     <Compile Include="Interfaces\Persistence\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\Persistence\IDemoConnectionFactory.cs" />
+    <Compile Include="Interfaces\Persistence\IDemoDbConnectionFactory.cs" />
     <Compile Include="Interfaces\Persistence\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\Persistence\IProductRepository.cs" />
     <Compile Include="Interfaces\Persistence\IRepository.cs" />

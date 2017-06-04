@@ -135,6 +135,10 @@
       <Project>{90912334-CADB-4125-80ED-2D91538F9A91}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{98db3c1b-ce26-44d7-8a90-500e297e130f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{C9BE9F2D-6006-4395-B2B9-92F573F275E1}</Project>
       <Name>Domain</Name>
