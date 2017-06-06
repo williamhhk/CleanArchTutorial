@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using MediatR;
-    using System.Data;
     using System.Collections.Generic;
     using Application.Interfaces.Persistence;
     using Dapper;
     using System.Linq;
+    using Application.Common;
 
     public class EventLogQuery
     {
@@ -26,9 +26,11 @@
         public class QueryHandler : IAsyncRequestHandler<Query, List<Model>>
         {
             private readonly IDemoDbConnectionFactory _db;
-            public QueryHandler(IDemoDbConnectionFactory db)
+            private readonly IMediator _mediator;
+            public QueryHandler(IDemoDbConnectionFactory db, IMediator mediator)
             {
                 _db = db;
+                _mediator = mediator;
             }
 
             public async Task<List<Model>> Handle(Query message)
@@ -42,35 +44,20 @@
                 try
                 {
                    results =  await _db.GetConnection.QueryAsync<Model>(queryStr).ConfigureAwait(false);
+                    _mediator?.Publish(new QueryExecuted("Successfully executed"));
                     return results.ToList();
 
                 }
                 catch (Exception ex)
                 {
-                var tcs = new TaskCompletionSource<Model>();
-                tcs.SetResult(new Model());
-                return results.ToList();
-
+                    //// create a notification to send it to logger
+                    //var tcs = new TaskCompletionSource<Model>();
+                    //tcs.SetResult(new Model());
+                    //return results.ToList();
+                    _mediator?.Publish(new ExceptionCaught(ex.Message));
                 }
+                return new List<Model>();
             }
         }
-
-        //public class CommandHandler : AsyncRequestHandler<Command>
-        //{
-        //    private readonly SchoolContext _db;
-
-        //    public CommandHandler(SchoolContext db)
-        //    {
-        //        _db = db;
-        //    }
-
-        //    protected override async Task HandleCore(Command message)
-        //    {
-        //        var student = await _db.Students.FindAsync(message.ID);
-
-        //        _db.Students.Remove(student);
-        //    }
-        //}
-
     }
 }

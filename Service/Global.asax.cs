@@ -124,7 +124,7 @@ namespace Service
             //  Dapper Inline SQL
             builder.RegisterType<ConnectionFactory>().As<IConnectionFactory>().SingleInstance();
             // NOTE : 'connectionStr' match parameter name in DemoDbConnectionFactory
-            builder.RegisterType<DemoDbConnectionFactory>().As<IDemoDbConnectionFactory>().WithParameter("connectionStr", "Data Source=Server;Initial Catalog=EventsLog;Integrated Security=True").SingleInstance();
+            builder.RegisterType<DemoDbConnectionFactory>().As<IDemoDbConnectionFactory>().WithParameter("connectionStr", "Data Source=WILLIAM-AZ;Initial Catalog=EventsLog;Integrated Security=True").SingleInstance();
 
 
             var container = builder.Build();
