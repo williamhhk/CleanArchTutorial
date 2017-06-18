@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specification", "Specification\Specification.csproj", "{F16FE2BF-D11A-4D2B-A0A3-4ADD82D97F37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.DnsClient", "Service.DnsClient\Service.DnsClient.csproj", "{4AFC9B53-AC12-4805-9C55-78CBF0EDA5F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{F16FE2BF-D11A-4D2B-A0A3-4ADD82D97F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F16FE2BF-D11A-4D2B-A0A3-4ADD82D97F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F16FE2BF-D11A-4D2B-A0A3-4ADD82D97F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFC9B53-AC12-4805-9C55-78CBF0EDA5F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFC9B53-AC12-4805-9C55-78CBF0EDA5F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFC9B53-AC12-4805-9C55-78CBF0EDA5F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFC9B53-AC12-4805-9C55-78CBF0EDA5F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

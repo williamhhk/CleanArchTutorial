@@ -40,6 +40,21 @@ namespace Service.Customers
         }
 
         [HttpGet]
+        [Route("{id}/get")]
+        public IHttpActionResult GetById(int id , [FromUri] string status)
+        {
+            // use mediator to send in a query ....
+            // create a new class e.g. QueryCustomersList
+            // return the results.
+            var list = _mediator.Send(new GetCustomersListQuery1());
+            return Ok(list.Result);
+
+            //return Ok();
+            //return Ok(_query.Execute());
+        }
+
+
+        [HttpGet]
         [Route("async")]
         public async Task<IHttpActionResult> GetAsync()
         {
