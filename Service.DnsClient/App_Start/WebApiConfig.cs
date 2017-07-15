@@ -3,6 +3,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Lifestyles;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Service.DnsClient
 {
@@ -14,7 +15,9 @@ namespace Service.DnsClient
             // Web API configuration and services
 
             // Web API routes
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*") { SupportsCredentials = true });
             config.MapHttpAttributeRoutes();
+
 
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApi",

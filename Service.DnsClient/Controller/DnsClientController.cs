@@ -4,6 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Collections.Generic;
 using Service.DnsClient.Dto;
+using System.Web.Http.Cors;
+using System.Web.UI.WebControls;
+using System.Web.Http.Description;
+using System.Net.Http;
+using System.Web;
+using System.Diagnostics;
 
 namespace Service.DnsClient.Controller
 {
@@ -20,6 +26,7 @@ namespace Service.DnsClient.Controller
         [HttpGet, Route("{hostName}/{type}", Name = "GetIPByHostname")]
         public IHttpActionResult GetIPByHostname(string hostName, QueryType type)
         {
+
             var client = new LookupClient();
             IDnsQueryResponse result = null;
             RecordDto record = new RecordDto() { HostName = new List<string>() { hostName }, Type = type.ToString() };
@@ -90,5 +97,35 @@ namespace Service.DnsClient.Controller
             };
             return links;
         }
+
+        [HttpGet]
+        [Route("test")]
+        public IHttpActionResult GetTest()
+        {
+            var result = new
+            {
+                Number = 1,
+                FieldAbc = "Abc"
+            };
+
+            return Ok(result);
+        }
+
+
+
+        [HttpPost]
+        [Route("files")]
+        [ResponseType(typeof(FileUpload))]
+        public async System.Threading.Tasks.Task<IHttpActionResult> PostFileUploadAsync()
+        {
+
+            var request = Request.Content.IsMimeMultipartContent();
+            var streamProvider = new MultipartFormDataStreamProvider("f:\\upload");
+            await Request.Content.ReadAsMultipartAsync(streamProvider);
+
+            return Ok();
+
+        }
+
     }
 }
